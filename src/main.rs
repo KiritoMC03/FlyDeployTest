@@ -25,7 +25,7 @@ async fn main() -> std::io::Result<()> {
     });
 
     let port = std::env::var("PORT")
-        .unwrap_or_else(|_| "3000".to_string())
+        .unwrap_or_else(|_| "8080".to_string())
         .parse()
         .expect("PORT must be a number");
 
@@ -41,7 +41,7 @@ async fn main() -> std::io::Result<()> {
             .route("/hey", web::get().to(manual_hello))
             .route("/mut_state_test", web::get().to(mut_state_test))
     })
-        .bind(("0.0.0.0", port))?
+        .bind(("154.62.109.84", port))?
         .run()
         .await
 }
