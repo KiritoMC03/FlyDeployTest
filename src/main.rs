@@ -27,7 +27,7 @@ async fn main() -> std::io::Result<()> {
     });
 
     let port = std::env::var("PORT")
-        .unwrap_or_else(|_| "8080".to_string())
+        .unwrap_or_else(|_| "65535".to_string())
         .parse()
         .expect("PORT must be a number");
 
