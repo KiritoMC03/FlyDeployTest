@@ -41,7 +41,7 @@ async fn main() -> std::io::Result<()> {
             .route("/hey", web::get().to(manual_hello))
             .route("/mut_state_test", web::get().to(mut_state_test))
     })
-        .bind(("154.62.109.84", port))?
+        .bind(("127.0.0.1", port))?
         .run()
         .await
 }
