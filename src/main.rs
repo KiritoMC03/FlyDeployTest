@@ -30,7 +30,7 @@ async fn main() -> std::io::Result<()> {
         .parse()
         .expect("PORT must be a number");
 
-    HttpServer::new(move || {
+    let server = HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(AppState {
                 app_name: "Actix web".to_string(),
@@ -43,8 +43,11 @@ async fn main() -> std::io::Result<()> {
             .route("/mut_state_test", web::get().to(mut_state_test))
     })
         .bind(("127.0.0.1", port))?
-        .run()
-        .await
+        .run();
+    println!("Server created. Request listening starting...");
+    let res = server.await;
+    println!("Server closed.");
+    res
 }
 
 async fn index(data: web::Data<AppState>) -> impl Responder {
