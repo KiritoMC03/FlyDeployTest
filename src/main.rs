@@ -21,13 +21,13 @@ struct AppStateWithCounter {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("ip: 127.0.0.1:8080");
+    println!("ip: 0.0.0.0:8000");
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),
     });
 
     let port = std::env::var("PORT")
-        .unwrap_or_else(|_| "65535".to_string())
+        .unwrap_or_else(|_| "8000".to_string())
         .parse()
         .expect("PORT must be a number");
 
@@ -44,7 +44,7 @@ async fn main() -> std::io::Result<()> {
             .route("/hey", web::get().to(manual_hello))
             .route("/mut_state_test", web::get().to(mut_state_test))
     })
-        .bind(("127.0.0.1", port))?
+        .bind(("0.0.0.0", port))?
         .run();
     println!("Server created. Request listening starting...");
     let res = server.await;
