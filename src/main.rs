@@ -8,6 +8,7 @@ use actix_web::{
     HttpResponse,
     HttpServer,
     Responder,
+    middleware::Logger
 };
 
 struct AppState {
@@ -32,6 +33,7 @@ async fn main() -> std::io::Result<()> {
 
     let server = HttpServer::new(move || {
         App::new()
+            .wrap(Logger::default())
             .app_data(web::Data::new(AppState {
                 app_name: "Actix web".to_string(),
             }))
