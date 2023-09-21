@@ -21,9 +21,9 @@ struct AppStateWithCounter {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let ip = "localhost";
+    let ip = "127.0.0.1";
     let port = "5000";
-    println!("address: {}{}", ip, port);
+    println!("address: {}:{}", ip, port);
     let counter = web::Data::new(AppStateWithCounter {
         counter: Mutex::new(0),
     });
